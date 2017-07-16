@@ -8,6 +8,13 @@ class ReimplementMapTest extends PHPUnit_Framework_TestCase
          * Your implementation goes here! Use loops, variables, whatever
          * you want, the only rule is you can't use `array_map`!
          */
+        $results = [];
+
+        foreach ($items as $item) {
+            $results[] = $callback($item);
+        }
+
+        return $results;
     }
 
     public function test_double_each_number()
