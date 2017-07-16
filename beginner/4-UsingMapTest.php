@@ -7,6 +7,13 @@ class UsingMapTest extends PHPUnit_Framework_TestCase
         /*
          * Copy your implementation from Exercise 1 here!
          */
+        $results = [];
+
+        foreach ($items as $item) {
+            $results[] = $callback($item);
+        }
+
+        return $results;
     }
 
     public function test_get_employee_names()
@@ -25,6 +32,9 @@ class UsingMapTest extends PHPUnit_Framework_TestCase
          *
          * $employeeNames = $this->map($employees, ...)
          */
+        $employeeNames = $this->map($employees, function($employee) {
+            return $employee['name'];
+        });
 
         $this->assertEquals([
             'John',
@@ -51,6 +61,9 @@ class UsingMapTest extends PHPUnit_Framework_TestCase
          *
          * $years = $this->map($dates, ...)
          */
+        $years = $this->map($dates, function($date) {
+            return $date->format('Y');
+        });
 
         $this->assertEquals([
             '2015',
@@ -78,6 +91,9 @@ class UsingMapTest extends PHPUnit_Framework_TestCase
          *
          * $displayPrices = $this->map($pricesInCents, ...)
          */
+        $displayPrices = $this->map($pricesInCents, function($price) {
+            return '$' . number_format($price/100, 2);
+        });
 
         $this->assertEquals([
             '$0.79',
