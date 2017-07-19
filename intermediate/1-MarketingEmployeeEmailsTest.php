@@ -23,6 +23,13 @@ class MarketingEmployeeEmailsTest extends PHPUnit_Framework_TestCase
          *
          * $emails = $employees->...
          */
+        $emails = $employees->filter(function($item) {
+                        return $item['department'] == 'Marketing';
+                    })
+                    ->map(function($item) {
+                        return $item['email'];
+                    })
+                    ->values();
 
         $this->assertEquals([
             'jane8@example.com',
