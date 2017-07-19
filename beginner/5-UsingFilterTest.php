@@ -7,6 +7,15 @@ class UsingFilterTest extends PHPUnit_Framework_TestCase
         /*
          * Copy your implementation from Exercise 2 here!
          */
+        $result = [];
+
+        foreach ($items as $item) {
+            if ($callback($item)) {
+                $result[] = $item;
+            }
+        }
+
+        return $result;
     }
 
     public function test_get_part_time_employees()
@@ -25,6 +34,9 @@ class UsingFilterTest extends PHPUnit_Framework_TestCase
          *
          * $partTimers = $this->filter($employees, ...)
          */
+        $partTimers = $this->filter($employees, function($employee) {
+            return $employee['employment'] == 'Part Time';
+        });
 
         $this->assertEquals([
             ['name' => 'John', 'department' => 'Sales', 'employment' => 'Part Time'],
@@ -50,6 +62,9 @@ class UsingFilterTest extends PHPUnit_Framework_TestCase
          *
          * $inStock = $this->filter($products, ...)
          */
+        $inStock = $this->filter($products, function($product) {
+            return $product['stock_quantity'] > 0;
+        });
 
         $this->assertEquals([
             ['product' => 'Banana', 'stock_quantity' => 12],
@@ -75,6 +90,9 @@ class UsingFilterTest extends PHPUnit_Framework_TestCase
          *
          * $bigCities = $this->filter($cities, ...)
          */
+        $bigCities = $this->filter($cities, function($city) {
+            return $city['population'] > 120000;
+        });
 
         $this->assertEquals([
             ['name' => 'Kitchener', 'population' => 204688],
